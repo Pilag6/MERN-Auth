@@ -14,8 +14,11 @@ const RegisterPage = () => {
     });
 
     return (
-        <div className="mx-auto max-w-md bg-zinc-800  p-10 ">
-            RegisterPage
+        <div className="mx-auto max-w-md bg-zinc-800 p-10">
+            <h2 className="mb-6 text-center text-2xl font-semibold uppercase ">
+                {" "}
+                Register Page
+            </h2>
             <form onSubmit={onSubmit}>
                 <input
                     className={inputsClassName}
@@ -36,7 +39,9 @@ const RegisterPage = () => {
                     placeholder="Password"
                 />
 
-                <button>Register</button>
+                <button className="w-full bg-slate-500 py-2 text-xl uppercase outline-none transition-all hover:bg-slate-600">
+                    Register
+                </button>
             </form>
         </div>
     );
