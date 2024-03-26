@@ -9,6 +9,11 @@ const Register = async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
+        const userFound = await User.findOne({ email });
+        if (userFound) {
+            return res.status(400).json(["Email already exists"]);
+        }
+
         // Hash the password using bcrypt with a salt factor of 10
         const passwordHash = await bcrypt.hash(password, 10);
 
@@ -30,7 +35,7 @@ const Register = async (req, res) => {
             username: userSaved.username,
             email: userSaved.email,
             createAt: userSaved.createdAt,
-            updatedAt: userSaved.updatedAt,
+            updatedAt: userSaved.updatedAt
         });
     } catch (error) {
         // If an error occurs, log the error and send a 500 status code with an error message
@@ -70,7 +75,7 @@ const Login = async (req, res) => {
             username: userFound.username,
             email: userFound.email,
             createAt: userFound.createdAt,
-            updatedAt: userFound.updatedAt,
+            updatedAt: userFound.updatedAt
         });
     } catch (error) {
         // If an error occurs, log the error and send a 500 status code with an error message
@@ -90,7 +95,7 @@ const Logout = (req, res) => {
 const Profile = async (req, res) => {
     // console.log(req.user);
     const userFound = await User.findById(req.user.id);
-    
+
     if (!userFound) return res.status(404).json({ message: "User not found" });
 
     return res.json({
@@ -98,8 +103,7 @@ const Profile = async (req, res) => {
         username: userFound.username,
         email: userFound.email,
         createAt: userFound.createdAt,
-        updatedAt: userFound.updatedAt,
-    
+        updatedAt: userFound.updatedAt
     });
 };
 

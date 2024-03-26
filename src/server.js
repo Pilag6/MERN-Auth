@@ -15,8 +15,6 @@ const app = express();
 // Set the port
 const PORT = 3333;
 
-
-
 // Middlewares
 app.use(cors());
 app.use(morgan("dev"));
@@ -26,7 +24,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api", authRoutes);
-app.use("/api", taskRoutes)
+app.use("/api", taskRoutes);
 
 // Connect to database
 connectDB();
